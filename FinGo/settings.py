@@ -121,6 +121,7 @@
 # CSRF_COOKIE_SECURE = False  # True in production with HTTPS
 import os
 from pathlib import Path
+import dj_database_url
 
 # -----------------------------
 # BASE DIR
