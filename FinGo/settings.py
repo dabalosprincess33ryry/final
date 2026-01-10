@@ -133,7 +133,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # -----------------------------
 SECRET_KEY = 'django-insecure-^1^tr2h2_oe@v005h*2*x8&!o!60k7rtb7rpbq(!mv-l=f)@ur'
 DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'e-commerce-django-xbxh.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'final-1-ayrt.onrender.com']
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://final-1-ayrt.onrender.com',
+    'https://www.final-1-ayrt.onrender.com',
+]
+
 
 # -----------------------------
 # MEDIA
@@ -199,13 +208,34 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'FinGo.wsgi.application'
 
+# -----------------------------
+# DATABASE
+# -----------------------------
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+import os
+import dj_database_url
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "database_mkv4",
+        "USER": "ryan",
+        "PASSWORD": "FVqTBdUm9iH9e3Hs7CdGR9jVJtr6lqlG",
+        "HOST": "dpg-d5g265pr0fns738a2ei0-a.virginia-postgres.render.com",
+        "PORT": "5432",
+        "OPTIONS": {
+            "sslmode": "require"   # This enforces SSL/TLS
+        },
     }
 }
+
+
 
 # -----------------------------
 # PASSWORD VALIDATION

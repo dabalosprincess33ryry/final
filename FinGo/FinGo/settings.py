@@ -11,9 +11,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 # -----------------------------
 SECRET_KEY = 'django-insecure-^1^tr2h2_oe@v005h*2*x8&!o!60k7rtb7rpbq(!mv-l=f)@ur'
-DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'e-commerce-django-xbxh.onrender.com']
+DEBUG = False
 
+ALLOWED_HOSTS = ['final-1-ayrt.onrender.com', 'localhost', '127.0.0.1']
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # -----------------------------
 # MEDIA
 # -----------------------------
@@ -78,24 +80,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'FinGo.wsgi.application'
 
-# -----------------------------
-# DATABASE
-# -----------------------------
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+
 
 import os
 import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL')
+    "default": dj_database_url.config(
+        default=os.environ.get(
+            "DATABASE_URL",
+            "postgresql://ryan:FVqTBdUm9iH9e3Hs7CdGR9jVJtr6lqlG@dpg-d5g265pr0fns738a2ei0-a.virginia-postgres.render.com:5432/database_mkv4"
+        )
     )
 }
+
 
 
 # -----------------------------
@@ -143,4 +141,3 @@ if DEBUG:
     from django.conf.urls.static import static
     urlpatterns = static(STATIC_URL, document_root=BASE_DIR / 'static')
     urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)
-
