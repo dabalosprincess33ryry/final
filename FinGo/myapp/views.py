@@ -23,8 +23,6 @@ from django.views.decorators.http import require_GET
 from django.contrib.auth import get_user_model
 
 
-
-
 # ✅ Utility: check if user is admin
 def is_admin(user):
     return user.is_staff or user.is_superuser
