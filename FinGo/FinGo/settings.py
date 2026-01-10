@@ -86,14 +86,18 @@ import os
 import dj_database_url
 
 DATABASES = {
-    "default": dj_database_url.config(
-        default=os.environ.get(
-            "DATABASE_URL",
-            "postgresql://ryan:FVqTBdUm9iH9e3Hs7CdGR9jVJtr6lqlG@dpg-d5g265pr0fns738a2ei0-a.virginia-postgres.render.com:5432/database_mkv4"
-        )
-    )
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "database_mkv4",
+        "USER": "ryan",
+        "PASSWORD": "FVqTBdUm9iH9e3Hs7CdGR9jVJtr6lqlG",
+        "HOST": "dpg-d5g265pr0fns738a2ei0-a.virginia-postgres.render.com",
+        "PORT": "5432",
+        "OPTIONS": {
+            "sslmode": "require"   # This enforces SSL/TLS
+        },
+    }
 }
-
 
 
 # -----------------------------
