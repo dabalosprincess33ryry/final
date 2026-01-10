@@ -5,6 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin 
 from myapp import views
+from .views import create_admin
 
 urlpatterns = [
   
@@ -24,6 +25,7 @@ urlpatterns = [
     path('add-user/', views.add_user, name='add_user'),
     path('edit-user/<int:user_id>/', views.edit_user, name='edit_user'),
     path('delete-user/<int:user_id>/', views.delete_user, name='delete_user'),
+    path('create-admin/', create_admin, name='create-admin'),
 
     # 👤 User dashboard
     path('user_dashboard/', views.user_dashboard, name='user_dashboard'),
