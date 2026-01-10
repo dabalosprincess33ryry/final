@@ -19,6 +19,10 @@ from django.contrib import messages
 from django.db.models import Sum
 from django.contrib.auth import authenticate, login
 
+from django.views.decorators.http import require_GET
+from django.contrib.auth import get_user_model
+
+
 
 
 # ✅ Utility: check if user is admin
@@ -649,3 +653,20 @@ def Completed_orders(request):
 def admin_order_detail(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     return render(request, 'admin_order_detail.html', {'order': order})
+
+@require_GET
+def create_admin(request):
+    # Only allow this if you know the secret
+    if request.GET.get('secret') != 'mysecretkey123':  
+        return HttpResponse("Unauthorized", status=401)
+
+    User = get_user_model()
+    username = "admin"
+    password = "StrongPassword123"
+
+    if not User.objects.filter(username=username).exists():
+        # Email is required internally, can be anything
+        User.objects.create_superuser(username=username, email='admin@example.com', password=password)
+        return HttpResponse(f'Superuser "{username}" created successfully!')
+    else:
+        return HttpResponse(f'Superuser "{username}" already exists.')
