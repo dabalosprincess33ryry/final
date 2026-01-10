@@ -15,6 +15,7 @@ urlpatterns = [
     path('register/', views.view_register, name='register'),
     path('login/', views.view_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
+    path('create-admin/', views.create_admin, name='create_admin'),
 
     # 🧑‍💼 Admin routes
     path('admin_dashboard/', views.admin_dashboard, name='admin_dashboard'),
